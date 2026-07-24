@@ -1,0 +1,22 @@
+[
+    {
+        "description": "Water leakage in Block A",
+        "category": "Maintenance"
+    },
+    {
+        "description": "lab bulb broken\nragging incident happend in A Block",
+        "category": "General Safety Issue"
+    },
+    {
+        "description": "Street light is not working near hostel",
+        "category": "Infrastructure Issue"
+    },
+    {
+        "description": "Street light is not working near hostel",
+        "category": "Infrastructure Issue"
+    },
+    {
+        "description": "Street light is not working near hostel\nFight happened near parking area",
+        "category": "Security Issue"
+    }
+]
