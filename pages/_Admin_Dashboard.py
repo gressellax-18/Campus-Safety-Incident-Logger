@@ -82,7 +82,7 @@ if reports:
                 new_remarks
             )
 
-            st.success("Status Updated Successfully")
+            st.success("Status Updated Successfully!")
             st.rerun()
 
         st.markdown("---")
