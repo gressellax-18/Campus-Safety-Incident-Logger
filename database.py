@@ -10,7 +10,6 @@ def create_table():
     conn = get_connection()
     cursor = conn.cursor()
 
-    # Create table if it does not exist
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS incidents (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -19,39 +18,51 @@ def create_table():
     )
     """)
 
-    # Add location column if it does not exist
-    try:
-        cursor.execute("ALTER TABLE incidents ADD COLUMN location TEXT")
-    except sqlite3.OperationalError:
-        pass
+    # Add columns if they don't exist
+    columns = [
+        ("location", "TEXT"),
+        ("incident_date", "TEXT"),
+        ("incident_time", "TEXT"),
+        ("reported_time", "TEXT"),
+        ("status", "TEXT DEFAULT 'Pending'"),
+        ("remarks", "TEXT")
+    ]
 
-    # Add status column if it does not exist
-    try:
-        cursor.execute("ALTER TABLE incidents ADD COLUMN status TEXT DEFAULT 'Pending'")
-    except sqlite3.OperationalError:
-        pass
-
-    # Add remarks column if it does not exist
-    try:
-        cursor.execute("ALTER TABLE incidents ADD COLUMN remarks TEXT")
-    except sqlite3.OperationalError:
-        pass
+    for column_name, column_type in columns:
+        try:
+            cursor.execute(f"ALTER TABLE incidents ADD COLUMN {column_name} {column_type}")
+        except sqlite3.OperationalError:
+            pass
 
     conn.commit()
     conn.close()
 
 
-def add_incident(description, category, location):
+def add_incident(description, category, location,
+                 incident_date, incident_time, reported_time):
+
     conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
-    INSERT INTO incidents(description, category, location, status, remarks)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO incidents(
+        description,
+        category,
+        location,
+        incident_date,
+        incident_time,
+        reported_time,
+        status,
+        remarks
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         description,
         category,
         location,
+        incident_date,
+        incident_time,
+        reported_time,
         "Pending",
         ""
     ))
@@ -70,6 +81,9 @@ def get_incidents():
         description,
         category,
         location,
+        incident_date,
+        incident_time,
+        reported_time,
         status,
         remarks
     FROM incidents
@@ -81,8 +95,8 @@ def get_incidents():
     return data
 
 
-# NEW FUNCTION - Update Status & Remarks
 def update_incident_status(incident_id, status, remarks):
+
     conn = get_connection()
     cursor = conn.cursor()
 
