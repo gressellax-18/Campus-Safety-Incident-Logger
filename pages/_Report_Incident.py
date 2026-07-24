@@ -16,3 +16,4 @@ if st.button("Submit Incident"):
         st.success("Incident reported successfully!")
     else:
         st.error("Please fill all fields.")
+        
