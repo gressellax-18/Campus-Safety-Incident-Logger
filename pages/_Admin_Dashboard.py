@@ -1,35 +1,46 @@
 import streamlit as st
-from database import (
-    create_table,
-    get_incidents,
-    update_incident_status
-)
+from database import create_table, get_incidents, update_incident_status
 
-# Create database table
 create_table()
 
-# -------------------------------
-# Simple Admin Login
-# -------------------------------
+st.set_page_config(
+    page_title="Admin Dashboard",
+    page_icon="👨‍💼",
+    layout="wide"
+)
+
+# ---------------- Login ----------------
+
 ADMIN_PASSWORD = "admin123"
 
 st.title("🔐 Admin Login")
 
-password = st.text_input("Enter Admin Password", type="password")
+password = st.text_input("Enter Password", type="password")
 
 if password != ADMIN_PASSWORD:
-    st.warning("Please enter the correct admin password.")
+    st.warning("Enter correct password")
     st.stop()
 
-# -------------------------------
-# Admin Dashboard
-# -------------------------------
+# ---------------- Dashboard ----------------
 
-st.title("🛠️ Admin Dashboard")
+st.title("👨‍💼 Admin Dashboard")
 
 reports = get_incidents()
 
-st.subheader("📋 All Reported Incidents")
+# Dashboard Statistics
+total = len(reports)
+pending = sum(1 for r in reports if r[7] == "Pending")
+progress = sum(1 for r in reports if r[7] == "In Progress")
+resolved = sum(1 for r in reports if r[7] == "Resolved")
+
+c1, c2, c3, c4 = st.columns(4)
+
+c1.metric("📄 Total", total)
+c2.metric("🟡 Pending", pending)
+c3.metric("🔵 Progress", progress)
+c4.metric("🟢 Resolved", resolved)
+
+st.divider()
 
 if reports:
 
@@ -45,53 +56,45 @@ if reports:
         status = report[7]
         remarks = report[8]
 
-        st.markdown(f"## 🚨 Incident ID : {incident_id}")
+        with st.expander(f"🚨 Incident #{incident_id}"):
 
-        st.write(f"**📝 Description:** {description}")
-        st.write(f"**📂 Category:** {category}")
-        st.write(f"**📍 Location:** {location}")
-        st.write(f"**📅 Incident Date:** {incident_date}")
-        st.write(f"**🕒 Incident Time:** {incident_time}")
-        st.write(f"**⏰ Reported Time:** {reported_time}")
+            st.write("**Category:**", category)
+            st.write("**Location:**", location)
+            st.write("**Date:**", incident_date)
+            st.write("**Time:**", incident_time)
+            st.write("**Reported:**", reported_time)
+            st.write("**Description:**", description)
 
-        # Status Display
-        if status == "Pending":
-            st.warning("🟡 Status : Pending")
+            if status == "Pending":
+                st.warning("🟡 Pending")
+            elif status == "In Progress":
+                st.info("🔵 In Progress")
+            elif status == "Resolved":
+                st.success("🟢 Resolved")
 
-        elif status == "In Progress":
-            st.info("🔵 Status : In Progress")
-
-        elif status == "Resolved":
-            st.success("🟢 Status : Resolved")
-
-        # Update Status
-        new_status = st.selectbox(
-            "Update Status",
-            ["Pending", "In Progress", "Resolved"],
-            index=["Pending", "In Progress", "Resolved"].index(status),
-            key=f"status_{incident_id}"
-        )
-
-        # Remarks
-        new_remarks = st.text_area(
-            "Resolution Remarks",
-            value=remarks if remarks else "",
-            key=f"remarks_{incident_id}"
-        )
-
-        # Update Button
-        if st.button("✅ Update", key=f"update_{incident_id}"):
-
-            update_incident_status(
-                incident_id,
-                new_status,
-                new_remarks
+            new_status = st.selectbox(
+                "Update Status",
+                ["Pending", "In Progress", "Resolved"],
+                index=["Pending", "In Progress", "Resolved"].index(status),
+                key=f"status_{incident_id}"
             )
 
-            st.success("✅ Status Updated Successfully!")
-            st.rerun()
+            new_remarks = st.text_area(
+                "Management Remarks",
+                value=remarks,
+                key=f"remarks_{incident_id}"
+            )
 
-        st.markdown("---")
+            if st.button("✅ Update", key=f"update_{incident_id}"):
+
+                update_incident_status(
+                    incident_id,
+                    new_status,
+                    new_remarks
+                )
+
+                st.success("Updated Successfully")
+                st.rerun()
 
 else:
-    st.info("No incidents reported yet.")
+    st.info("No reports found.")

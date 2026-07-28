@@ -1,45 +1,53 @@
 import sqlite3
 
 
+# -----------------------------
+# Database Connection
+# -----------------------------
 def get_connection():
-    conn = sqlite3.connect("incidents.db", check_same_thread=False)
-    return conn
+    return sqlite3.connect(
+        "incidents.db",
+        check_same_thread=False
+    )
 
 
+# -----------------------------
+# Create Table
+# -----------------------------
 def create_table():
+
     conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS incidents (
+    CREATE TABLE IF NOT EXISTS incidents(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         description TEXT,
-        category TEXT
+        category TEXT,
+        location TEXT,
+        incident_date TEXT,
+        incident_time TEXT,
+        reported_time TEXT,
+        status TEXT DEFAULT 'Pending',
+        remarks TEXT
     )
     """)
-
-    # Add columns if they don't exist
-    columns = [
-        ("location", "TEXT"),
-        ("incident_date", "TEXT"),
-        ("incident_time", "TEXT"),
-        ("reported_time", "TEXT"),
-        ("status", "TEXT DEFAULT 'Pending'"),
-        ("remarks", "TEXT")
-    ]
-
-    for column_name, column_type in columns:
-        try:
-            cursor.execute(f"ALTER TABLE incidents ADD COLUMN {column_name} {column_type}")
-        except sqlite3.OperationalError:
-            pass
 
     conn.commit()
     conn.close()
 
 
-def add_incident(description, category, location,
-                 incident_date, incident_time, reported_time):
+# -----------------------------
+# Add Incident
+# -----------------------------
+def add_incident(
+    description,
+    category,
+    location,
+    incident_date,
+    incident_time,
+    reported_time
+):
 
     conn = get_connection()
     cursor = conn.cursor()
@@ -71,7 +79,11 @@ def add_incident(description, category, location,
     conn.close()
 
 
+# -----------------------------
+# Get All Incidents
+# -----------------------------
 def get_incidents():
+
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -87,24 +99,62 @@ def get_incidents():
         status,
         remarks
     FROM incidents
+    ORDER BY id DESC
     """)
 
     data = cursor.fetchall()
 
     conn.close()
+
     return data
 
 
-def update_incident_status(incident_id, status, remarks):
+# -----------------------------
+# Update Status
+# -----------------------------
+def update_incident_status(
+    incident_id,
+    status,
+    remarks
+):
 
     conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
     UPDATE incidents
-    SET status=?, remarks=?
+    SET
+        status=?,
+        remarks=?
     WHERE id=?
-    """, (status, remarks, incident_id))
+    """, (
+        status,
+        remarks,
+        incident_id
+    ))
 
     conn.commit()
     conn.close()
+
+
+# -----------------------------
+# Dashboard Statistics
+# -----------------------------
+def get_statistics():
+
+    reports = get_incidents()
+
+    total = len(reports)
+
+    resolved = sum(
+        1 for report in reports
+        if report[7] == "Resolved"
+    )
+
+    pending = total - resolved
+
+    return {
+        "total": total,
+        "resolved": resolved,
+        "pending": pending
+    }
