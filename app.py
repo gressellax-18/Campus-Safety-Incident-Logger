@@ -1,158 +1,117 @@
 import streamlit as st
-from database import create_table, get_incidents
-
-# -----------------------------
-# Database Initialization
-# -----------------------------
-create_table()
 
 st.set_page_config(
     page_title="Campus Safety Incident Logger",
-    page_icon="🚨",
+    page_icon="🛡️",
     layout="wide"
 )
 
-# -----------------------------
-# Fetch Data
-# -----------------------------
-reports = get_incidents()
-
-total_reports = len(reports)
-resolved = sum(1 for report in reports if report[7] == "Resolved")
-pending = total_reports - resolved
-
-# -----------------------------
 # Header
-# -----------------------------
-st.markdown(
-    """
-    <h1 style='text-align:center; color:#D32F2F;'>
-    🚨 Campus Safety Incident Logger
-    </h1>
-    """,
-    unsafe_allow_html=True
-)
-
-st.markdown(
-    """
-    <h4 style='text-align:center; color:gray;'>
-    AI Powered Campus Incident Reporting System
-    </h4>
-    """,
-    unsafe_allow_html=True
-)
+st.title("🛡️ Campus Safety Incident Logger")
+st.subheader("AI-Powered Incident Reporting & Safety Management System")
 
 st.markdown("---")
 
-# -----------------------------
-# Dashboard Cards
-# -----------------------------
-col1, col2, col3 = st.columns(3)
+# Overview
+st.header("📖 Overview")
 
-with col1:
-    st.metric("📋 Total Reports", total_reports)
+st.write("""
+Campus Safety Incident Logger is an intelligent safety management system
+designed to improve security and incident handling within educational
+institutions.
 
-with col2:
-    st.metric("✅ Resolved", resolved)
+The platform allows students, faculty members, and campus authorities
+to report, track, and manage safety-related incidents efficiently.
 
-with col3:
-    st.metric("⏳ Pending", pending)
+Using analytics and AI-powered insights, the system helps identify
+potential risks, monitor incident trends, and support faster decision-making.
 
-st.markdown("---")
-
-# -----------------------------
-# About Project
-# -----------------------------
-st.subheader("📖 About Project")
-
-st.info("""
-Campus Safety Incident Logger is an AI-powered web application that allows students
-to report campus safety incidents quickly and securely.
-
-The system automatically classifies the incident using Artificial Intelligence
-and stores it in the database for administrators to review.
+Our goal is to create a safer, smarter, and more secure campus
+environment for everyone.
 """)
 
-# -----------------------------
+st.markdown("---")
+
+# Objectives
+st.header("🎯 Objectives")
+
+st.write("""
+✅ Simplify incident reporting.
+
+✅ Improve campus safety and security.
+
+✅ Enable real-time incident monitoring.
+
+✅ Support data-driven decision making.
+
+✅ Maintain a centralized incident database.
+
+✅ Provide AI-powered safety insights.
+
+✅ Increase transparency and accountability.
+""")
+
+st.markdown("---")
+
 # Features
-# -----------------------------
-st.subheader("✨ Key Features")
+st.header("✨ Key Features")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.success("""
-✔ Report Incidents
-
-✔ AI Classification
-
-✔ Secure SQLite Database
-
-✔ Anonymous Friendly
-""")
+    st.success("📝 Incident Reporting")
+    st.success("📂 Incident Tracking")
+    st.success("📊 Analytics Dashboard")
+    st.success("📄 Report History")
 
 with col2:
-    st.success("""
-✔ Admin Dashboard
+    st.success("🤖 AI Risk Analysis")
+    st.success("🔐 Secure Admin Dashboard")
+    st.success("📈 Trend Visualization")
+    st.success("⚡ Real-Time Monitoring")
 
-✔ Incident Tracking
+st.markdown("---")
 
-✔ Status Updates
+# Advantages
+st.header("🌟 Advantages")
 
-✔ Preventive Suggestions
+st.write("""
+🚀 Faster Reporting and Response
+
+🛡️ Improved Campus Security
+
+📊 Data-Driven Decision Making
+
+🤖 AI-Powered Intelligence
+
+🔍 Transparent Incident Tracking
+
+📈 Better Trend Analysis
+
+💡 Proactive Risk Prevention
+
+🤝 Improved Communication
+
+🌍 Future-Ready System
+
+📚 Centralized Incident Repository
 """)
 
 st.markdown("---")
 
-# -----------------------------
-# Safety Tips
-# -----------------------------
-st.subheader("🛡 Campus Safety Tips")
+# Impact
+st.header("🎓 Impact on Campus")
 
-tips = [
-    "🚶 Walk in well-lit areas at night.",
-    "📞 Save campus emergency contacts.",
-    "👥 Report suspicious activities immediately.",
-    "🎒 Keep valuables secure.",
-    "🚫 Avoid isolated areas after dark."
-]
+st.info("""
+The Campus Safety Incident Logger helps institutions create a safer
+environment by enabling quick reporting, efficient incident management,
+and proactive safety planning.
 
-for tip in tips:
-    st.write(tip)
+The system improves communication between students and administrators,
+reduces response time, and promotes a culture of safety and accountability.
+""")
 
 st.markdown("---")
 
-# -----------------------------
-# Recent Reports
-# -----------------------------
-st.subheader("📑 Recent Incident Reports")
-
-if reports:
-    st.dataframe(
-        reports[-5:],
-        use_container_width=True
-    )
-else:
-    st.warning("No incidents reported yet.")
-
-st.markdown("---")
-
-# -----------------------------
 # Footer
-# -----------------------------
-st.markdown(
-    """
-    <center>
-
-    <h4>👨‍💻 Developed Using</h4>
-
-    Streamlit | Python | SQLite | AI / Machine Learning
-
-    <br>
-
-    <b>B.Tech Mini Project</b>
-
-    </center>
-    """,
-    unsafe_allow_html=True
-)
+st.success("🛡️ Building a Safer Campus Through Technology, Analytics & AI")
