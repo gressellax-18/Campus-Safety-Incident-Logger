@@ -1,256 +1,664 @@
 import streamlit as st
 
-st.set_page_config(page_title="Home", page_icon="🏠", layout="wide")
 
-# ---------------- CUSTOM CSS ----------------
-st.markdown("""
-<style>
-.main-title{
-    font-size:42px;
-    font-weight:bold;
-    color:#d32f2f;
-    text-align:center;
-}
-
-.sub-title{
-    text-align:center;
-    color:gray;
-    font-size:20px;
-    margin-bottom:25px;
-}
-
-.card{
-    background-color:#ffffff;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0px 5px 15px rgba(0,0,0,0.15);
-    margin-bottom:15px;
-}
-
-.feature{
-    background:#f8f9fa;
-    padding:15px;
-    border-left:6px solid #d32f2f;
-    border-radius:10px;
-    margin-bottom:12px;
-}
-
-.footer{
-    text-align:center;
-    color:gray;
-    margin-top:30px;
-}
-</style>
-""", unsafe_allow_html=True)
-
-# ---------------- HEADER ----------------
-
-st.markdown('<p class="main-title">🚨 Campus Safety Incident Logger</p>', unsafe_allow_html=True)
-
-st.markdown(
-'<p class="sub-title">Protect • Report • Resolve</p>',
-unsafe_allow_html=True
+st.set_page_config(
+    page_title="Campus Safety Incident Logger",
+    page_icon="🛡️",
+    layout="wide"
 )
 
-st.success("🎓 AI Powered Smart Campus Safety Management System")
 
-st.divider()
 
-# ---------------- DASHBOARD ----------------
+# ================= CUSTOM CSS =================
 
-st.subheader("📊 Project Highlights")
 
-c1,c2,c3,c4=st.columns(4)
+st.markdown("""
+<style>
 
-c1.metric("📄 Modules","9")
-c2.metric("🤖 AI Ready","Yes")
-c3.metric("💾 Database","SQLite")
-c4.metric("🚀 Version","2.0")
 
-st.divider()
+/* Background */
 
-# ---------------- ABOUT ----------------
+.stApp{
 
-st.subheader("📌 About The Project")
+background:
+
+linear-gradient(
+135deg,
+#ecfdf5,
+#cffafe,
+#f0fdfa
+);
+
+}
+
+
+
+/* Hero */
+
+
+.hero{
+
+background:
+
+linear-gradient(
+135deg,
+#065f46,
+#0f766e,
+#0891b2
+);
+
+
+padding:60px;
+
+border-radius:35px;
+
+text-align:center;
+
+color:white;
+
+box-shadow:
+
+0 20px 50px rgba(0,0,0,0.25);
+
+}
+
+
+
+.hero h1{
+
+font-size:60px;
+
+font-weight:900;
+
+margin-bottom:10px;
+
+}
+
+
+
+.hero h3{
+
+font-size:25px;
+
+color:#ccfbf1;
+
+}
+
+
+
+.hero p{
+
+font-size:20px;
+
+}
+
+
+
+
+/* Glass Card */
+
+
+.card{
+
+background:
+
+rgba(255,255,255,0.75);
+
+backdrop-filter:blur(12px);
+
+
+padding:30px;
+
+border-radius:25px;
+
+
+box-shadow:
+
+0 10px 30px rgba(0,0,0,0.15);
+
+
+border-top:
+
+6px solid #0d9488;
+
+
+text-align:center;
+
+
+}
+
+
+
+/* Stats */
+
+
+.stat{
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+
+box-shadow:
+
+0 8px 20px rgba(0,0,0,.12);
+
+
+text-align:center;
+
+
+}
+
+
+
+.stat h1{
+
+font-size:45px;
+
+}
+
+
+
+
+.stat h2{
+
+color:#047857;
+
+}
+
+
+
+
+/* Feature */
+
+
+.feature{
+
+
+background:
+
+linear-gradient(
+135deg,
+#ffffff,
+#ecfeff
+);
+
+
+padding:25px;
+
+
+border-radius:22px;
+
+
+height:190px;
+
+
+box-shadow:
+
+0 8px 25px rgba(0,0,0,.12);
+
+
+border-left:
+
+7px solid #14b8a6;
+
+
+}
+
+
+
+.feature h2{
+
+color:#0f766e;
+
+}
+
+
+
+/* AI Section */
+
+
+.ai-box{
+
+
+background:
+
+linear-gradient(
+135deg,
+#064e3b,
+#0f766e
+);
+
+
+padding:35px;
+
+
+border-radius:30px;
+
+
+color:white;
+
+
+box-shadow:
+
+0 15px 40px rgba(0,0,0,.25);
+
+
+}
+
+
+
+.ai-box h2{
+
+color:#99f6e4;
+
+}
+
+
+
+
+/* Workflow */
+
+
+.workflow{
+
+
+background:white;
+
+
+padding:30px;
+
+
+border-radius:25px;
+
+
+font-size:20px;
+
+
+text-align:center;
+
+
+box-shadow:
+
+0 10px 25px rgba(0,0,0,.15);
+
+
+border-left:
+
+8px solid #0891b2;
+
+
+}
+
+
+
+
+.footer{
+
+
+text-align:center;
+
+
+padding:35px;
+
+
+color:#475569;
+
+
+}
+
+
+</style>
+
+""",
+unsafe_allow_html=True)
+
+
+
+
+# ================= HERO =================
+
+
+
+st.markdown("""
+<div class="hero">
+
+
+<h1>
+🛡️ Campus Safety<br>
+Incident Logger
+</h1>
+
+
+<h3>
+AI Powered Smart Campus Protection System
+</h3>
+
+
+<p>
+Protect Students • Report Incidents • Resolve Faster
+</p>
+
+
+</div>
+
+""",
+unsafe_allow_html=True)
+
+
+
+
+st.write("")
+
+
+
+
+# ================= STATS =================
+
+
+st.subheader("📊 System Highlights")
+
+
+
+c1,c2,c3,c4 = st.columns(4)
+
+
+
+stats=[
+
+("🚨","Incident Reporting"),
+
+("🤖","AI Detection"),
+
+("💾","SQLite Database"),
+
+("📈","Analytics")
+
+]
+
+
+
+for col,item in zip(
+[c1,c2,c3,c4],
+stats
+):
+
+    with col:
+
+        st.markdown(f"""
+
+        <div class="stat">
+
+
+        <h1>{item[0]}</h1>
+
+
+        <h2>{item[1]}</h2>
+
+
+        </div>
+
+
+        """,
+        unsafe_allow_html=True)
+
+
+
+
+st.write("")
+
+
+
+
+# ================= ABOUT =================
+
+
 
 st.markdown("""
 <div class="card">
 
-Campus Safety Incident Logger is a smart web application developed to improve
-student safety inside college campuses.
 
-Students can report incidents instantly and the administration can review,
-investigate and resolve them through a centralized dashboard.
+<h2>
+🚀 About The Project
+</h2>
 
-The entire complaint process becomes digital, transparent and easy to track.
+
+<p>
+
+Campus Safety Incident Logger is an AI-powered
+web application designed to improve campus security.
+
+Students can report incidents digitally while
+administrators can monitor and resolve complaints
+through a centralized system.
+
+</p>
+
 
 </div>
-""",unsafe_allow_html=True)
+
+""",
+unsafe_allow_html=True)
+
+
+
 
 st.divider()
 
-# ---------------- INCIDENT TYPES ----------------
 
-st.subheader("🚨 Incident Categories")
 
-col1,col2,col3=st.columns(3)
 
-with col1:
-    st.error("🚨 Ragging")
-    st.error("🚲 Theft")
+# ================= FEATURES =================
 
-with col2:
-    st.warning("🔥 Fire Accident")
-    st.warning("🏥 Medical Emergency")
 
-with col3:
-    st.info("⚠ Suspicious Activity")
-    st.info("👊 Harassment")
+
+st.subheader("✨ Key Features")
+
+
+
+c1,c2,c3=st.columns(3)
+
+
+
+features=[
+
+("🚨 Digital Reporting",
+"Quick and secure incident submission"),
+
+("🤖 AI Classification",
+"Automatic incident category prediction"),
+
+("👨‍💼 Admin Dashboard",
+"Manage and track complaints")
+
+]
+
+
+
+for col,item in zip(
+[c1,c2,c3],
+features
+):
+
+    with col:
+
+
+        st.markdown(f"""
+
+        <div class="feature">
+
+
+        <h2>{item[0]}</h2>
+
+
+        <p>{item[1]}</p>
+
+
+        </div>
+
+
+        """,
+        unsafe_allow_html=True)
+
+
+
+
+st.write("")
+
+
+
+
+# ================= AI =================
+
+
+
+st.markdown("""
+<div class="ai-box">
+
+
+<h2>
+🤖 Artificial Intelligence Layer
+</h2>
+
+
+<p>
+
+The system uses AI techniques to analyse
+incident descriptions, classify safety issues
+and generate preventive suggestions.
+
+</p>
+
+
+</div>
+
+""",
+unsafe_allow_html=True)
+
+
+
 
 st.divider()
 
-# ---------------- OBJECTIVES ----------------
 
-st.subheader("🎯 Project Objectives")
 
-c1,c2=st.columns(2)
 
-with c1:
+# ================= WORKFLOW =================
 
-    st.markdown("""
-<div class="feature">
 
-✅ Digital Complaint Reporting
-
-</div>
-
-<div class="feature">
-
-✅ Faster Response
-
-</div>
-
-<div class="feature">
-
-✅ Student Safety
-
-</div>
-""",unsafe_allow_html=True)
-
-with c2:
-
-    st.markdown("""
-<div class="feature">
-
-✅ Paperless System
-
-</div>
-
-<div class="feature">
-
-✅ Complaint Tracking
-
-</div>
-
-<div class="feature">
-
-✅ Centralized Database
-
-</div>
-""",unsafe_allow_html=True)
-
-st.divider()
-
-# ---------------- FEATURES ----------------
-
-st.subheader("✨ System Features")
-
-a,b,c=st.columns(3)
-
-with a:
-    st.success("🔐 Secure Login")
-    st.success("🚨 Report Incident")
-    st.success("📄 My Reports")
-
-with b:
-    st.success("👨‍💼 Admin Dashboard")
-    st.success("📊 Analytics")
-    st.success("🤖 AI Classification")
-
-with c:
-    st.success("📍 Incident Tracking")
-    st.success("📝 Status Updates")
-    st.success("📢 Management Remarks")
-
-st.divider()
-
-# ---------------- WORKFLOW ----------------
 
 st.subheader("⚙ System Workflow")
 
-st.info("""
 
-👨‍🎓 Student
 
-⬇
+st.markdown("""
+<div class="workflow">
 
-🚨 Report Incident
 
-⬇
+👨‍🎓 Student Reports Incident
 
-🤖 AI Classifies Incident
+<br>⬇<br>
 
-⬇
+🚨 Incident Submission
 
-💾 Stored in Database
+<br>⬇<br>
 
-⬇
+🤖 AI Processing
 
-👨‍💼 Admin Reviews
+<br>⬇<br>
 
-⬇
+💾 Database Storage
 
-📝 Status Updated
+<br>⬇<br>
 
-⬇
+👨‍💼 Admin Verification
 
-📄 Student Tracks Report
+<br>⬇<br>
 
-""")
+🛡 Safer Campus
+
+
+</div>
+
+""",
+unsafe_allow_html=True)
+
+
+
 
 st.divider()
 
-# ---------------- FUTURE ----------------
+
+
+
+# ================= FUTURE =================
+
+
 
 st.subheader("🚀 Future Enhancements")
 
-col1,col2=st.columns(2)
 
-with col1:
 
-    st.success("📱 Mobile Application")
+x,y,z=st.columns(3)
 
-    st.success("📍 Live GPS Location")
 
-    st.success("📧 Email Notifications")
 
-with col2:
+for col,text in zip(
+[x,y,z],
+[
+"📱 Mobile Application",
+"📍 GPS Tracking",
+"🎥 Smart CCTV"
+]
+):
 
-    st.success("📸 Image Upload")
+    with col:
 
-    st.success("🤖 Advanced AI Model")
+        st.markdown(f"""
 
-    st.success("🔔 Real-time Alerts")
+        <div class="card">
+
+        <h2>{text}</h2>
+
+        </div>
+
+        """,
+        unsafe_allow_html=True)
+
+
+
 
 st.divider()
 
-st.markdown(
-"""
+
+
+
+# ================= FOOTER =================
+
+
+
+st.markdown("""
 <div class="footer">
 
-❤️ Developed using Python | Streamlit | SQLite | Machine Learning
+
+<h2>
+🛡 Campus Safety Incident Logger
+</h2>
+
+
+<p>
+Python | Streamlit | AI/ML | SQLite
+</p>
+
+
+<p>
+Artificial Intelligence and Data Science | KIET | JNTUK
+</p>
+
 
 </div>
+
 """,
-unsafe_allow_html=True
-)
+unsafe_allow_html=True)

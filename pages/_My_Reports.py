@@ -1,7 +1,6 @@
 import streamlit as st
 from database import create_table, get_incidents
 
-create_table()
 
 st.set_page_config(
     page_title="My Reports",
@@ -9,104 +8,619 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("📄 My Reports")
-st.write("Track the status of your submitted incidents.")
+
+create_table()
+
+
+
+# ================= CSS =================
+
+
+st.markdown("""
+<style>
+
+
+.stApp{
+
+background:
+
+linear-gradient(
+135deg,
+#eef2ff,
+#f8fafc,
+#e0f2fe
+);
+
+}
+
+
+
+/* HEADER */
+
+
+.header{
+
+
+background:
+
+linear-gradient(
+135deg,
+#2563eb,
+#06b6d4
+);
+
+
+padding:45px;
+
+
+border-radius:30px;
+
+
+text-align:center;
+
+
+color:white;
+
+
+box-shadow:
+
+0 15px 35px rgba(37,99,235,.3);
+
+
+}
+
+
+.header h1{
+
+font-size:48px;
+
+font-weight:900;
+
+}
+
+
+
+.header p{
+
+font-size:20px;
+
+color:#e0f2fe;
+
+}
+
+
+
+
+/* REPORT CARD */
+
+
+.report-card{
+
+
+background:white;
+
+
+padding:25px;
+
+
+border-radius:25px;
+
+
+margin-bottom:20px;
+
+
+box-shadow:
+
+0 8px 25px rgba(0,0,0,.12);
+
+
+border-left:
+
+8px solid #2563eb;
+
+
+}
+
+
+
+
+.report-card h2{
+
+color:#1e3a8a;
+
+}
+
+
+
+
+/* INFO BOX */
+
+
+.info-box{
+
+
+background:#eff6ff;
+
+
+padding:18px;
+
+
+border-radius:15px;
+
+
+border-left:
+
+6px solid #3b82f6;
+
+
+}
+
+
+
+
+/* STATUS */
+
+
+.pending{
+
+
+background:#fef3c7;
+
+
+color:#92400e;
+
+
+padding:8px 15px;
+
+
+border-radius:20px;
+
+
+font-weight:bold;
+
+
+}
+
+
+.viewed{
+
+
+background:#dbeafe;
+
+
+color:#1d4ed8;
+
+
+padding:8px 15px;
+
+
+border-radius:20px;
+
+
+font-weight:bold;
+
+
+}
+
+
+
+.progress{
+
+
+background:#ede9fe;
+
+
+color:#6d28d9;
+
+
+padding:8px 15px;
+
+
+border-radius:20px;
+
+
+font-weight:bold;
+
+
+}
+
+
+
+.resolved{
+
+
+background:#dcfce7;
+
+
+color:#166534;
+
+
+padding:8px 15px;
+
+
+border-radius:20px;
+
+
+font-weight:bold;
+
+
+}
+
+
+
+
+.footer{
+
+
+text-align:center;
+
+
+padding:35px;
+
+
+color:#64748b;
+
+
+}
+
+
+
+</style>
+
+""",
+unsafe_allow_html=True)
+
+
+
+
+
+# ================= HEADER =================
+
+
+
+st.markdown("""
+<div class="header">
+
+
+<h1>
+📄 My Incident Reports
+</h1>
+
+
+<p>
+Track your complaints and monitor resolution status
+</p>
+
+
+</div>
+
+""",
+unsafe_allow_html=True)
+
+
+
+st.write("")
+
+
+
+
+
+# ================= SEARCH =================
+
+
+
+search = st.text_input(
+
+"🔍 Search Your Reports",
+
+placeholder="Search by category or description..."
+
+)
+
+
 
 st.divider()
-search = st.text_input(
-    "🔍 Search Reports",
-    placeholder="Search by description..."
-)
+
+
+
+
+
+# ================= DATA =================
+
 
 
 reports = get_incidents()
-st.divider()
 
-search = st.text_input(
-    "🔍 Search Reports",
-    placeholder="Search by incident description..."
-)
 
 
 if reports:
 
-    st.metric("📋 Total Reports", len(reports))
+
+    total=len(reports)
+
+
+    st.metric(
+        "📋 Total Submitted Reports",
+        total
+    )
+
 
     st.divider()
 
-for report in reports:
 
-    incident_id = report[0]
-    description = report[1]
-    category = report[2]
-    location = report[3]
-    incident_date = report[4]
-    incident_time = report[5]
-    reported_time = report[6]
-    status = report[7]
-    remarks = report[8] if report[8] else ""
 
-    # 🔍 Search Filter
-    if search and search.lower() not in description.lower():
-        continue
+    for report in reports:
 
-    with st.container(border=True):
-        st.subheader(f"🚨 Incident #{incident_id}")
 
-        
 
-        # Fix for None remarks
-        remarks = report[8] if report[8] else ""
+        incident_id = report[0]
 
-        with st.container(border=True):
+        description = report[1]
 
-            st.subheader(f"🚨 Incident #{incident_id}")
+        category = report[2]
 
-            col1, col2 = st.columns(2)
+        location = report[3]
 
-            with col1:
-                st.write(f"**📂 Category:** {category}")
-                st.write(f"**📍 Location:** {location}")
-                st.write(f"**📅 Date:** {incident_date}")
+        date = report[4]
 
-            with col2:
-                st.write(f"**🕒 Time:** {incident_time}")
-                st.write(f"**⏰ Reported:** {reported_time}")
+        time = report[5]
 
-            st.write("### 📝 Description")
-            st.info(description)
+        reported_time = report[6]
 
-            # Status Display
-            if status == "Pending":
-                st.error("🟡 Status : Pending")
-                st.progress(25)
+        status = report[7]
 
-            elif status == "Viewed":
-                st.info("👀 Status : Viewed")
-                st.progress(50)
+        remarks = report[8] if report[8] else "No remarks from management"
 
-            elif status == "In Progress":
-                st.warning("🔵 Status : In Progress")
-                st.progress(75)
 
-            elif status == "Resolved":
-                st.success("🟢 Status : Resolved")
-                st.progress(100)
 
-            st.write("### 💬 Management Remarks")
 
-            if remarks.strip():
-                st.success(remarks)
-            else:
-                st.info("No remarks added yet.")
 
-            st.markdown("---")
+        # SEARCH FILTER
+
+
+        if search:
+
+
+            if (
+
+            search.lower() not in description.lower()
+
+            and
+
+            search.lower() not in category.lower()
+
+            ):
+
+                continue
+
+
+
+
+
+        # STATUS DESIGN
+
+
+        if status=="Pending":
+
+
+            badge="""
+
+<span class="pending">
+
+🟡 Pending
+
+</span>
+
+"""
+
+
+            progress_value=25
+
+
+
+        elif status=="Viewed":
+
+
+            badge="""
+
+<span class="viewed">
+
+👀 Viewed
+
+</span>
+
+"""
+
+
+            progress_value=50
+
+
+
+        elif status=="In Progress":
+
+
+            badge="""
+
+<span class="progress">
+
+🔵 In Progress
+
+</span>
+
+"""
+
+
+            progress_value=75
+
+
+
+        else:
+
+
+            badge="""
+
+<span class="resolved">
+
+🟢 Resolved
+
+</span>
+
+"""
+
+
+            progress_value=100
+
+
+
+
+
+
+        # REPORT CARD
+
+
+
+        st.markdown(f"""
+
+<div class="report-card">
+
+
+<h2>
+
+🚨 Incident #{incident_id}
+
+</h2>
+
+
+
+<div class="info-box">
+
+
+<b>📂 Category:</b>
+
+{category}
+
+
+<br><br>
+
+
+<b>📍 Location:</b>
+
+{location}
+
+
+<br><br>
+
+
+<b>📅 Incident Date:</b>
+
+{date}
+
+
+<br><br>
+
+
+<b>🕒 Incident Time:</b>
+
+{time}
+
+
+<br><br>
+
+
+<b>⏰ Reported On:</b>
+
+{reported_time}
+
+
+</div>
+
+
+
+<br>
+
+
+
+<b>📝 Description</b>
+
+
+<p>
+
+{description}
+
+</p>
+
+
+
+<br>
+
+
+<b>Status:</b>
+
+{badge}
+
+
+
+<br><br>
+
+
+<b>Progress Tracking</b>
+
+
+</div>
+
+
+""",
+unsafe_allow_html=True)
+
+
+
+        st.progress(
+            progress_value/100
+        )
+
+
+
+        st.info(
+        f"💬 Management Remarks: {remarks}"
+        )
+
+
+        st.divider()
+
+
+
 
 else:
-    st.info("No reports found.")
 
-st.divider()
 
-st.success("✅ You can track every complaint submitted to the management.")
+    st.warning(
+    "No incident reports available."
+    )
 
-st.caption("Campus Safety Incident Logger | Student Report Tracking")
+
+
+
+
+
+# ================= FOOTER =================
+
+
+
+st.markdown("""
+<div class="footer">
+
+
+<h3>
+🛡 Campus Safety Incident Logger
+</h3>
+
+
+<p>
+Student Complaint Tracking Portal
+</p>
+
+
+</div>
+
+""",
+unsafe_allow_html=True)

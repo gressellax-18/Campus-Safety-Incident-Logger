@@ -1,165 +1,445 @@
 import streamlit as st
+
 from ai_ml_layer import classify_incident, preventive_suggestion
 
-st.set_page_config(page_title="AI / ML Layer", page_icon="🤖", layout="wide")
 
-# ---------------- CSS ----------------
+# ================= CUSTOM CSS =================
 
 st.markdown("""
 <style>
 
-.title{
-font-size:42px;
-font-weight:bold;
-color:#1565C0;
-text-align:center;
+/* Background */
+
+.stApp{
+
+background:linear-gradient(
+135deg,
+#f8fafc,
+#eef2ff
+);
+
 }
 
-.subtitle{
+
+/* Hero */
+
+
+.hero{
+
+background:
+linear-gradient(
+135deg,
+#312e81,
+#4f46e5,
+#2563eb
+);
+
+padding:45px;
+
+border-radius:25px;
+
 text-align:center;
-font-size:18px;
-color:gray;
-margin-bottom:25px;
+
+color:white;
+
+box-shadow:
+0 15px 35px rgba(0,0,0,0.25);
+
 }
 
-.box{
-background:#f8f9fa;
-padding:18px;
-border-radius:15px;
-box-shadow:0px 5px 15px rgba(0,0,0,.12);
-margin-bottom:15px;
+
+.hero h1{
+
+font-size:48px;
+
+font-weight:900;
+
 }
+
+
+.hero p{
+
+font-size:20px;
+
+color:#dbeafe;
+
+}
+
+
+
+/* Section */
+
+.section{
+
+font-size:32px;
+
+font-weight:800;
+
+color:#111827;
+
+margin-top:30px;
+
+}
+
+
+
+/* Cards */
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.12);
+
+transition:.3s;
+
+}
+
+
+.card:hover{
+
+transform:translateY(-8px);
+
+}
+
+
+
+/* AI Box */
+
+.ai-box{
+
+background:
+linear-gradient(
+135deg,
+#1e1b4b,
+#4338ca
+);
+
+color:white;
+
+padding:30px;
+
+border-radius:22px;
+
+box-shadow:
+0 12px 30px rgba(0,0,0,.25);
+
+}
+
+
+
+/* Category */
+
+.category{
+
+background:white;
+
+padding:20px;
+
+border-radius:18px;
+
+text-align:center;
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.12);
+
+}
+
+
+
+/* Result */
+
 
 .result{
-background:#d4edda;
-padding:20px;
-border-radius:12px;
-border-left:8px solid green;
+
+background:#ecfdf5;
+
+padding:30px;
+
+border-radius:20px;
+
+border-left:8px solid #16a34a;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.15);
+
 }
 
+
+
+/* Footer */
+
+.footer{
+
+text-align:center;
+
+padding:30px;
+
+color:gray;
+
+}
+
+
 </style>
+
 """,unsafe_allow_html=True)
 
-# ---------------- HEADER ----------------
 
-st.markdown('<p class="title">🤖 Artificial Intelligence Layer</p>',unsafe_allow_html=True)
 
-st.markdown('<p class="subtitle">Smart Incident Classification using Machine Learning</p>',unsafe_allow_html=True)
+# ================= HERO =================
 
-st.divider()
-
-# ---------------- ABOUT ----------------
 
 st.markdown("""
+<div class="hero">
 
-<div class="box">
+<h1>🤖 Artificial Intelligence Layer</h1>
 
-### 🧠 AI Overview
+<p>
+Smart Incident Classification & Safety Recommendation Engine
+</p>
 
-The AI Engine automatically analyses the incident description submitted by students.
-
-It predicts the incident category and instantly provides preventive safety recommendations to assist both students and campus management.
+<p>
+Analyze • Predict • Protect
+</p>
 
 </div>
 
 """,unsafe_allow_html=True)
 
+
+
+st.write("")
+
+
+
+# ================= AI INTRO =================
+
+
+st.markdown(
+'<div class="section">🧠 AI Overview</div>',
+unsafe_allow_html=True
+)
+
+
+st.markdown("""
+<div class="ai-box">
+
+<h2>How AI Helps?</h2>
+
+<p>
+
+The AI module analyzes student incident descriptions using
+Natural Language Processing techniques.
+
+It identifies the incident category and provides preventive
+safety suggestions to improve campus response.
+
+</p>
+
+</div>
+
+""",
+unsafe_allow_html=True)
+
+
+
 st.divider()
 
-# ---------------- WORKFLOW ----------------
 
-st.subheader("⚙ AI Processing Workflow")
 
-st.success("""
+# ================= AI WORKFLOW =================
 
-👨‍🎓 Student Reports Incident
 
-⬇
+st.markdown(
+'<div class="section">⚙ AI Processing Pipeline</div>',
+unsafe_allow_html=True
+)
 
-📝 Text Processing
 
-⬇
+steps=[
 
-🤖 AI Model Analysis
+("👨‍🎓","Student Report"),
+("📝","Text Processing"),
+("🤖","AI Analysis"),
+("🏷️","Category Prediction"),
+("💡","Safety Suggestion"),
+("💾","Database Storage"),
+("👨‍💼","Admin Action")
 
-⬇
+]
 
-🏷 Category Prediction
 
-⬇
+cols=st.columns(len(steps))
 
-💡 Safety Suggestion
 
-⬇
+for col,step in zip(cols,steps):
 
-💾 Stored in Database
+    with col:
 
-⬇
+        st.markdown(f"""
 
-👨‍💼 Admin Review
+        <div class="card" style="text-align:center">
 
-""")
+        <h1>{step[0]}</h1>
+
+        <b>{step[1]}</b>
+
+        </div>
+
+        """,
+        unsafe_allow_html=True)
+
+
 
 st.divider()
 
-# ---------------- FEATURES ----------------
 
-st.subheader("✨ AI Features")
 
-c1,c2=st.columns(2)
+# ================= FEATURES =================
+
+
+st.markdown(
+'<div class="section">✨ AI Features</div>',
+unsafe_allow_html=True
+)
+
+
+
+f1,f2,f3=st.columns(3)
+
+
+features=[
+
+("🤖","Incident Classification"),
+
+("🏷️","Category Detection"),
+
+("💡","Preventive Suggestions")
+
+]
+
+
+for col,item in zip([f1,f2,f3],features):
+
+    with col:
+
+        st.markdown(f"""
+
+        <div class="category">
+
+        <h1>{item[0]}</h1>
+
+        <h3>{item[1]}</h3>
+
+        </div>
+
+        """,
+        unsafe_allow_html=True)
+
+
+
+st.divider()
+
+
+
+# ================= SUPPORTED CATEGORIES =================
+
+
+st.markdown(
+'<div class="section">🚨 Supported Categories</div>',
+unsafe_allow_html=True
+)
+
+
+
+c1,c2,c3=st.columns(3)
+
 
 with c1:
 
-    st.success("🤖 Automatic Incident Classification")
+    st.markdown("""
+    <div class="category">
 
-    st.success("📝 Text Analysis")
+    🚨 Ragging
 
-    st.success("🏷 Smart Category Detection")
+    <br><br>
+
+    🚲 Theft
+
+    </div>
+    """,unsafe_allow_html=True)
+
+
 
 with c2:
 
-    st.success("💡 Preventive Suggestions")
+    st.markdown("""
+    <div class="category">
 
-    st.success("⚡ Faster Processing")
+    🔥 Fire Accident
 
-    st.success("🎯 Better Decision Support")
+    <br><br>
+
+    🏥 Medical Emergency
+
+    </div>
+    """,unsafe_allow_html=True)
+
+
+
+with c3:
+
+    st.markdown("""
+    <div class="category">
+
+    ⚠️ Suspicious Activity
+
+    <br><br>
+
+    👊 Harassment
+
+    </div>
+    """,unsafe_allow_html=True)
+
+
 
 st.divider()
 
-# ---------------- CATEGORY SUPPORT ----------------
 
-st.subheader("🚨 Supported Incident Categories")
 
-a,b,c=st.columns(3)
+# ================= LIVE AI TEST =================
 
-with a:
-    st.error("🚨 Ragging")
-    st.error("🚲 Theft")
 
-with b:
-    st.warning("🔥 Fire")
-    st.warning("🏥 Medical Emergency")
-
-with c:
-    st.info("⚠ Suspicious Activity")
-    st.info("👊 Harassment")
-
-st.divider()
-
-# ---------------- LIVE TEST ----------------
-
-st.subheader("🧪 AI Live Testing")
-
-incident=st.text_area(
-    "Enter Incident Description",
-    placeholder="Example : My mobile phone was stolen near the library."
+st.markdown(
+'<div class="section">🧪 Live AI Testing</div>',
+unsafe_allow_html=True
 )
 
-if st.button("🤖 Analyze Incident",use_container_width=True):
+
+
+incident=st.text_area(
+"Enter Incident Description",
+placeholder=
+"Example: My phone was stolen near the library."
+)
+
+
+
+if st.button(
+"🤖 Analyze Incident",
+use_container_width=True
+):
 
     if incident.strip()=="":
-
-        st.warning("Please enter an incident description.")
+        
+        st.warning(
+        "Please enter incident details."
+        )
 
     else:
 
@@ -167,91 +447,118 @@ if st.button("🤖 Analyze Incident",use_container_width=True):
 
         suggestion=preventive_suggestion(category)
 
-        st.success("✅ Analysis Completed Successfully")
+
+        st.success(
+        "AI Analysis Completed Successfully"
+        )
+
 
         st.markdown(f"""
-<div class="result">
 
-<h3>📌 Prediction Result</h3>
+        <div class="result">
 
-<b>🏷 Predicted Category :</b> {category}
+        <h2>📌 Prediction Result</h2>
 
-<br><br>
 
-<b>💡 Preventive Suggestion :</b>
+        <h3>
+        🏷 Category:
+        {category}
+        </h3>
 
-{suggestion}
 
-</div>
+        <h3>
+        💡 Suggestion:
+        </h3>
 
-""",unsafe_allow_html=True)
 
-        st.progress(95)
+        <p>
+        {suggestion}
+        </p>
 
-        st.info("🎯 AI Prediction Confidence : 95%")
 
-st.divider()
+        </div>
 
-# ---------------- ADVANTAGES ----------------
+        """,
+        unsafe_allow_html=True)
 
-st.subheader("🌟 Advantages of AI")
 
-col1,col2=st.columns(2)
+        st.progress(0.95)
 
-with col1:
 
-    st.info("""
+        st.info(
+        "🎯 Prediction Confidence : 95%"
+        )
 
-✅ Faster Classification
 
-✅ Reduced Manual Work
-
-✅ Better Accuracy
-
-""")
-
-with col2:
-
-    st.info("""
-
-✅ Smart Recommendations
-
-✅ Better Campus Safety
-
-✅ Future AI Ready
-
-""")
 
 st.divider()
 
-# ---------------- FUTURE ----------------
 
-st.subheader("🚀 Future Enhancements")
 
-st.success("""
+# ================= FUTURE AI =================
 
-📸 Image Based Detection
 
-🎥 CCTV Integration
+st.markdown(
+'<div class="section">🚀 Future AI Enhancements</div>',
+unsafe_allow_html=True
+)
 
-📍 Live GPS Tracking
 
-🔔 Automatic Alerts
 
-📊 Predictive Analytics
+future1,future2,future3=st.columns(3)
 
-😊 Sentiment Analysis
 
-""")
+
+future=[
+
+("📸","Image Detection"),
+
+("📍","GPS Based Safety"),
+
+("🎥","CCTV Integration")
+
+]
+
+
+for col,item in zip(
+    [future1,future2,future3],
+    future
+):
+
+    with col:
+
+        st.markdown(f"""
+
+        <div class="card"
+        style="text-align:center">
+
+        <h1>{item[0]}</h1>
+
+        <h3>{item[1]}</h3>
+
+        </div>
+
+        """,
+        unsafe_allow_html=True)
+
+
 
 st.divider()
+
+
+
+# ================= FOOTER =================
+
 
 st.markdown("""
-<center>
+<div class="footer">
 
-### 🤖 AI Powered Campus Safety
+<h2>🤖 AI Powered Campus Safety</h2>
 
-Making Campus Security Smarter with Artificial Intelligence
+<p>
+Making Campus Security Smarter with Artificial Intelligence ❤️
+</p>
 
-</center>
-""",unsafe_allow_html=True)
+</div>
+""",
+unsafe_allow_html=True)

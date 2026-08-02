@@ -1,264 +1,620 @@
 import streamlit as st
 
-st.set_page_config(page_title="About", page_icon="📖", layout="wide")
 
-# ---------------- CSS ----------------
+st.set_page_config(
+    page_title="About Campus Safety",
+    page_icon="📖",
+    layout="wide"
+)
+
+
+
+# ================= CSS =================
 
 st.markdown("""
 <style>
 
-.title{
-font-size:42px;
-font-weight:bold;
-color:#d32f2f;
-text-align:center;
+
+.stApp{
+
+background:
+linear-gradient(
+135deg,
+#020617,
+#111827,
+#312e81
+);
+
+color:white;
+
 }
 
-.subtitle{
+
+
+/* Hero */
+
+
+.hero{
+
+background:
+
+linear-gradient(
+135deg,
+#7c3aed,
+#2563eb
+);
+
+
+padding:70px;
+
+
+border-radius:35px;
+
+
 text-align:center;
-color:gray;
-font-size:20px;
-margin-bottom:25px;
+
+
+box-shadow:
+
+0 20px 50px rgba(0,0,0,.5);
+
+
 }
 
-.card{
-background:#ffffff;
-padding:20px;
-border-radius:15px;
-box-shadow:0px 6px 15px rgba(0,0,0,0.12);
-margin-bottom:18px;
+
+.hero h1{
+
+font-size:60px;
+
+font-weight:900;
+
 }
+
+
+
+.hero p{
+
+font-size:22px;
+
+color:#ddd6fe;
+
+}
+
+
+
+/* Glass */
+
+
+.glass{
+
+
+background:
+
+rgba(255,255,255,0.12);
+
+
+backdrop-filter:blur(15px);
+
+
+padding:35px;
+
+
+border-radius:25px;
+
+
+border:
+
+1px solid rgba(255,255,255,.2);
+
+
+box-shadow:
+
+0 15px 40px rgba(0,0,0,.3);
+
+
+}
+
+
+
+
+.glass h2{
+
+color:#c4b5fd;
+
+}
+
+
+
+/* Problem */
+
 
 .problem{
-background:#fff3cd;
-padding:18px;
-border-left:8px solid orange;
-border-radius:10px;
+
+
+background:
+
+linear-gradient(
+135deg,
+#7f1d1d,
+#991b1b
+);
+
+
+padding:30px;
+
+
+border-radius:25px;
+
+
 }
+
+
+
+/* Solution */
+
 
 .solution{
-background:#d4edda;
-padding:18px;
-border-left:8px solid green;
-border-radius:10px;
+
+
+background:
+
+linear-gradient(
+135deg,
+#065f46,
+#059669
+);
+
+
+padding:30px;
+
+
+border-radius:25px;
+
+
 }
 
+
+
+/* Cards */
+
+
+.card{
+
+
+background:
+
+rgba(255,255,255,.1);
+
+
+padding:25px;
+
+
+border-radius:20px;
+
+
+text-align:center;
+
+
+height:180px;
+
+
+border:
+
+1px solid rgba(255,255,255,.2);
+
+
+}
+
+
+
+.card h2{
+
+color:#93c5fd;
+
+}
+
+
+
+
+/* Architecture */
+
+
+.flow{
+
+
+background:
+
+rgba(255,255,255,.08);
+
+
+padding:30px;
+
+
+border-radius:25px;
+
+
+text-align:center;
+
+
+font-size:20px;
+
+
+line-height:2.2;
+
+
+}
+
+
+
+
+
+.footer{
+
+text-align:center;
+
+padding:40px;
+
+color:#cbd5e1;
+
+
+}
+
+
 </style>
-""",unsafe_allow_html=True)
 
-# ---------------- HEADER ----------------
+""",
+unsafe_allow_html=True)
 
-st.markdown('<p class="title">📖 About Project</p>',unsafe_allow_html=True)
 
-st.markdown('<p class="subtitle">AI Powered Campus Safety Management System</p>',unsafe_allow_html=True)
 
-st.divider()
 
-# ---------------- OVERVIEW ----------------
+# ================= HERO =================
+
+
 
 st.markdown("""
+<div class="hero">
 
-<div class="card">
 
-### 🎯 Project Overview
+<h1>
+📖 About Project
+</h1>
 
-Campus Safety Incident Logger is a smart web application developed to help
-students report safety-related incidents quickly and securely.
 
-The system enables students to submit complaints digitally while allowing
-administrators to review, investigate and resolve incidents efficiently.
+<p>
+Campus Safety Incident Logger
+</p>
 
-It provides transparency, faster response and better campus safety.
+
+<p>
+AI Powered Digital Safety Ecosystem
+</p>
+
 
 </div>
 
-""",unsafe_allow_html=True)
+""",
+unsafe_allow_html=True)
 
-# ---------------- PROBLEM ----------------
 
-st.subheader("🚨 Problem Statement")
+
+st.write("")
+
+
+
+
+# ================= INTRO =================
+
+
 
 st.markdown("""
+<div class="glass">
 
-<div class="problem">
 
-❌ Paper-based complaint systems
+<h2>
+🚀 Project Vision
+</h2>
 
-❌ Delay in reporting incidents
 
-❌ No complaint tracking
+<p>
 
-❌ Lack of transparency
+Campus Safety Incident Logger aims to create a
+safer educational environment by providing a
+digital platform for reporting, monitoring and
+resolving campus incidents.
 
-❌ Slow administrative response
+The system combines web technology,
+database management and artificial intelligence
+to improve safety response.
 
-❌ Students hesitate to report issues
+</p>
+
 
 </div>
 
-""",unsafe_allow_html=True)
+""",
+unsafe_allow_html=True)
 
-st.divider()
 
-# ---------------- SOLUTION ----------------
 
-st.subheader("💡 Proposed Solution")
 
-st.markdown("""
+st.write("")
 
-<div class="solution">
 
-✔ Digital Incident Reporting
 
-✔ AI Based Classification
 
-✔ Complaint Tracking
+# ================= PROBLEM SOLUTION =================
 
-✔ Admin Dashboard
 
-✔ Status Updates
+col1,col2=st.columns(2)
 
-✔ Safe & Secure Database
 
-✔ Better Communication
-
-</div>
-
-""",unsafe_allow_html=True)
-
-st.divider()
-
-# ---------------- OBJECTIVES ----------------
-
-st.subheader("🎯 Objectives")
-
-c1,c2=st.columns(2)
-
-with c1:
-
-    st.success("📌 Improve Campus Safety")
-
-    st.success("📌 Digital Complaint System")
-
-    st.success("📌 Paperless Process")
-
-with c2:
-
-    st.success("📌 Faster Resolution")
-
-    st.success("📌 Complaint Transparency")
-
-    st.success("📌 AI Integration")
-
-st.divider()
-
-# ---------------- BENEFITS ----------------
-
-st.subheader("🌟 Benefits")
-
-col1,col2,col3=st.columns(3)
 
 with col1:
 
-    st.info("""
 
-👨‍🎓 Students
+    st.markdown("""
+    <div class="problem">
 
-• Easy Reporting
 
-• Complaint Tracking
+    <h2>
+    🚨 Existing Challenges
+    </h2>
 
-• Faster Help
 
-""")
+    <p>
+
+    ❌ Manual complaint process
+
+    <br><br>
+
+    ❌ Delayed communication
+
+    <br><br>
+
+    ❌ No tracking mechanism
+
+    <br><br>
+
+    ❌ Poor data management
+
+
+    </p>
+
+
+    </div>
+
+    """,
+    unsafe_allow_html=True)
+
+
+
+
 
 with col2:
 
-    st.info("""
 
-👮 Management
+    st.markdown("""
+    <div class="solution">
 
-• Central Dashboard
 
-• Better Monitoring
+    <h2>
+    💡 Our Solution
+    </h2>
 
-• Quick Action
 
-""")
+    <p>
 
-with col3:
+    ✅ Digital reporting
 
-    st.info("""
+    <br><br>
 
-🏫 Campus
+    ✅ AI based analysis
 
-• Safer Environment
+    <br><br>
 
-• Digital Records
+    ✅ Admin dashboard
 
-• Better Security
+    <br><br>
 
-""")
+    ✅ Smart tracking
+
+
+    </p>
+
+
+    </div>
+
+    """,
+    unsafe_allow_html=True)
+
+
+
 
 st.divider()
 
-# ---------------- WORKFLOW ----------------
 
-st.subheader("⚙ Project Workflow")
 
-st.success("""
+
+# ================= MISSION =================
+
+
+
+st.subheader("🎯 Project Mission")
+
+
+
+a,b,c=st.columns(3)
+
+
+
+for col,data in zip(
+[a,b,c],
+[
+("🛡 Protection",
+"Improve student safety"),
+
+("⚡ Response",
+"Reduce reaction time"),
+
+("🤖 Intelligence",
+"Use AI for smart decisions")
+]
+):
+
+    with col:
+
+        st.markdown(f"""
+
+        <div class="card">
+
+
+        <h2>{data[0]}</h2>
+
+
+        <p>{data[1]}</p>
+
+
+        </div>
+
+
+        """,
+        unsafe_allow_html=True)
+
+
+
+
+st.divider()
+
+
+
+
+# ================= ARCHITECTURE =================
+
+
+
+st.subheader("⚙ System Architecture")
+
+
+
+st.markdown("""
+<div class="flow">
+
 
 👨‍🎓 Student
 
-⬇
-
-🚨 Report Incident
 
 ⬇
 
-🤖 AI Categorization
+
+🚨 Incident Reporting Module
+
 
 ⬇
+
+
+🤖 AI Classification Engine
+
+
+⬇
+
 
 💾 SQLite Database
 
-⬇
-
-👨‍💼 Admin Verification
 
 ⬇
 
-📝 Status Update
+
+👨‍💼 Admin Dashboard
+
 
 ⬇
 
-📄 Student Tracking
 
-""")
+📊 Analytics & Resolution
+
+
+</div>
+
+""",
+unsafe_allow_html=True)
+
+
+
 
 st.divider()
 
-# ---------------- TECHNOLOGIES ----------------
 
-st.subheader("🛠 Technologies Used")
 
-a,b,c,d=st.columns(4)
 
-a.metric("🐍 Python","100%")
-b.metric("🌐 Streamlit","UI")
-c.metric("💾 SQLite","Database")
-d.metric("🤖 AI/ML","Future Ready")
+# ================= IMPACT =================
+
+
+
+st.subheader("📈 Project Impact")
+
+
+
+x,y,z,w=st.columns(4)
+
+
+
+for col,data in zip(
+[x,y,z,w],
+[
+("🚨","Quick Reporting"),
+("🤖","AI Support"),
+("📊","Data Analysis"),
+("🛡","Safe Campus")
+]
+):
+
+    with col:
+
+        st.markdown(f"""
+
+        <div class="card">
+
+
+        <h1>{data[0]}</h1>
+
+
+        <h3>{data[1]}</h3>
+
+
+        </div>
+
+
+        """,
+        unsafe_allow_html=True)
+
+
+
 
 st.divider()
 
-# ---------------- FOOTER ----------------
+
+
+
+# ================= FOOTER =================
+
+
 
 st.markdown("""
-<center>
+<div class="footer">
 
-### ❤️ Campus Safety Incident Logger
 
-Making College Campuses Safer with Technology
+<h2>
+📖 Campus Safety Incident Logger
+</h2>
 
-</center>
-""",unsafe_allow_html=True)
+
+<p>
+Making Campuses Safer with Artificial Intelligence
+</p>
+
+
+</div>
+
+""",
+unsafe_allow_html=True)

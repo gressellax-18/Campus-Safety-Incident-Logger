@@ -2,118 +2,307 @@ import streamlit as st
 from ai_ml_layer import classify_incident, preventive_suggestion
 
 
-# ---------------- PAGE CONFIG ----------------
-
 st.set_page_config(
-    page_title="AI Live Demo | Campus Safety",
+    page_title="AI Live Demo",
     page_icon="🚀",
     layout="wide"
 )
 
 
-# ---------------- CSS ----------------
+# ================= CSS =================
 
 st.markdown("""
 <style>
 
-.main-title{
-    text-align:center;
-    font-size:42px;
-    font-weight:800;
-    color:#0D47A1;
+
+.stApp{
+
+background:
+linear-gradient(
+135deg,
+#111827,
+#1e1b4b,
+#312e81
+);
+
 }
 
-.subtitle{
-    text-align:center;
-    font-size:18px;
-    color:#555;
+
+
+/* HEADER */
+
+
+.hero{
+
+background:
+
+linear-gradient(
+135deg,
+#9333ea,
+#db2777,
+#f97316
+);
+
+
+padding:50px;
+
+
+border-radius:35px;
+
+
+text-align:center;
+
+
+box-shadow:
+
+0 15px 40px rgba(236,72,153,0.4);
+
+
+color:white;
+
 }
 
-.card{
-    background:white;
-    padding:22px;
-    border-radius:18px;
-    box-shadow:0px 4px 15px rgba(0,0,0,0.12);
-    border-left:6px solid #1565C0;
+
+.hero h1{
+
+font-size:55px;
+
+font-weight:900;
+
 }
+
+
+
+.hero p{
+
+font-size:21px;
+
+color:#fce7f3;
+
+}
+
+
+
+
+/* AI CARD */
+
 
 .ai-card{
-    background:#E8F5E9;
-    padding:25px;
-    border-radius:18px;
-    border-left:8px solid green;
+
+
+background:
+
+rgba(255,255,255,0.12);
+
+
+padding:30px;
+
+
+border-radius:25px;
+
+
+border:1px solid rgba(255,255,255,0.25);
+
+
+box-shadow:
+
+0 10px 30px rgba(0,0,0,0.4);
+
+
+color:white;
+
 }
 
-.cctv-card{
-    background:#E3F2FD;
-    padding:25px;
-    border-radius:18px;
-    border-left:8px solid #0277BD;
+
+
+.ai-card h2{
+
+color:#f9a8d4;
+
 }
 
-.workflow{
-    background:#F5F7FA;
-    padding:20px;
-    border-radius:15px;
-    font-size:18px;
+
+
+
+/* RESULT */
+
+
+.result{
+
+
+background:
+
+linear-gradient(
+135deg,
+#064e3b,
+#047857
+);
+
+
+padding:30px;
+
+
+border-radius:25px;
+
+
+border-left:
+
+8px solid #22c55e;
+
+
+color:white;
+
+
 }
+
+
+
+
+/* CCTV */
+
+
+.cctv{
+
+
+background:
+
+linear-gradient(
+135deg,
+#431407,
+#9a3412
+);
+
+
+padding:30px;
+
+
+border-radius:25px;
+
+
+border-left:
+
+8px solid #fb923c;
+
+
+color:white;
+
+}
+
+
+
+
+/* SAMPLE */
+
+
+.sample{
+
+
+background:
+
+rgba(255,255,255,0.15);
+
+
+padding:20px;
+
+
+border-radius:20px;
+
+
+text-align:center;
+
+
+color:white;
+
+
+box-shadow:
+
+0 5px 15px rgba(0,0,0,.3);
+
+
+}
+
+
+
+/* FOOTER */
+
+
+.footer{
+
+text-align:center;
+
+padding:40px;
+
+color:#cbd5e1;
+
+}
+
+
 
 </style>
-""", unsafe_allow_html=True)
+
+""",
+unsafe_allow_html=True)
 
 
 
-# ---------------- HEADER ----------------
 
 
-st.markdown(
-    '<div class="main-title">🚀 AI Powered Live Demonstration</div>',
-    unsafe_allow_html=True
-)
-
-
-st.markdown(
-    '<div class="subtitle">'
-    'Campus Safety Incident Logger - Intelligent Monitoring System'
-    '</div>',
-    unsafe_allow_html=True
-)
-
-
-st.divider()
-
-
-
-# ---------------- INTRO ----------------
+# ================= HEADER =================
 
 
 st.markdown("""
-<div class="card">
+<div class="hero">
 
-<h2>🎯 Live Demo Purpose</h2>
 
-This demonstration shows how Artificial Intelligence helps
-campus authorities in:
+<h1>
+🚀 AI Powered Live Demonstration
+</h1>
 
-<br><br>
 
-✔ Automatic incident classification
+<p>
+Campus Safety Incident Logger - Intelligent Monitoring System
+</p>
 
-<br>
-
-✔ Safety recommendation generation
-
-<br>
-
-✔ CCTV based threat monitoring
-
-<br>
-
-✔ Faster emergency response
 
 </div>
 
-""", unsafe_allow_html=True)
+""",
+unsafe_allow_html=True)
+
+
+
+st.write("")
+
+
+
+
+
+# ================= INTRO =================
+
+
+st.markdown("""
+<div class="ai-card">
+
+
+<h2>
+🤖 Artificial Intelligence Module
+</h2>
+
+
+<p>
+
+This module demonstrates automatic incident
+classification using AI and generates safety
+recommendations for campus management.
+
+</p>
+
+
+</div>
+
+""",
+unsafe_allow_html=True)
+
 
 
 
@@ -121,449 +310,153 @@ st.divider()
 
 
 
-# ==================================================
-# AI INCIDENT ANALYSIS
-# ==================================================
 
 
-st.subheader("📝 Student Incident Reporting")
+# ================= AI INCIDENT TEST =================
+
+
+
+st.subheader("🧠 AI Incident Classification")
+
 
 
 incident = st.text_area(
-    "Describe Incident",
-    height=120,
-    placeholder=
-    "Example: My mobile phone was stolen near the library."
+
+"Enter Incident Description",
+
+placeholder=
+"Example: My mobile phone was stolen near library"
+
 )
+
 
 
 
 if st.button(
-    "🤖 Analyze Incident",
-    use_container_width=True
+"🚀 Run AI Analysis",
+use_container_width=True
 ):
 
+
     if incident.strip()=="":
+
+
         st.warning(
-            "Please enter incident description."
+        "Please enter incident details."
         )
+
 
     else:
 
+
         with st.spinner(
-            "AI is analyzing the complaint..."
+        "🤖 AI Model analysing..."
         ):
 
 
-            category = classify_incident(incident)
-
-            suggestion = preventive_suggestion(category)
-
-
-
-        st.success(
-            "AI Analysis Completed Successfully"
-        )
+            category = classify_incident(
+                incident
+            )
 
 
-        st.divider()
-
-
-        st.subheader(
-            "📊 AI Analysis Result"
-        )
-
-
-        c1,c2,c3 = st.columns(3)
-
-
-        with c1:
-
-            st.metric(
-                "🏷 Category",
+            suggestion = preventive_suggestion(
                 category
             )
 
 
-        with c2:
 
-            st.metric(
-                "⚡ Priority",
-                "High"
-            )
+        st.success(
+        "AI Analysis Completed Successfully"
+        )
 
 
-        with c3:
 
-            st.metric(
-                "🤖 Confidence",
-                "95%"
-            )
+        st.markdown(f"""
+
+<div class="result">
+
+
+<h2>
+📊 AI Prediction Result
+</h2>
+
+
+<p>
+
+🏷 <b>Incident Category:</b>
+
+{category}
+
+
+<br><br>
+
+
+🎯 <b>Confidence:</b>
+
+95%
+
+
+<br><br>
+
+
+💡 <b>Safety Recommendation:</b>
+
+
+<br>
+
+
+{suggestion}
+
+
+</p>
+
+
+</div>
+
+""",
+unsafe_allow_html=True)
+
 
 
         st.progress(95)
 
 
 
-        st.divider()
 
-
-
-        st.markdown(
-        f"""
-
-<div class="ai-card">
-
-<h3>💡 AI Safety Recommendation</h3>
-
-<p>{suggestion}</p>
-
-</div>
-
-        """,
-        unsafe_allow_html=True
-        )
-
-
-
-# ==================================================
-# CCTV SURVEILLANCE MODULE
-# ==================================================
-
-
-        st.markdown(
-        f"""
-
-<div class="ai-card">
-
-<h3>💡 AI Safety Recommendation</h3>
-
-<p>{suggestion}</p>
-
-</div>
-
-        """,
-        unsafe_allow_html=True
-        )
-
-
-# ==============================
-# 📹 CCTV MODULE START HERE
-# ==============================
 
 
 st.divider()
 
-st.subheader("📹 AI Based CCTV Surveillance System")
 
 
-st.markdown("""
-<div class="cctv-card">
 
-<h3>👁 Smart Campus Vision</h3>
 
-AI monitors CCTV feeds and detects suspicious activities.
+# ================= CCTV MODULE =================
 
-</div>
-
-""", unsafe_allow_html=True)
-
-
-
-camera = st.selectbox(
-    "Select CCTV Camera",
-    [
-        "Main Gate Camera",
-        "Library Camera",
-        "Parking Area Camera",
-        "Hostel Corridor Camera",
-        "Laboratory Camera"
-    ]
-)
-
-
-st.info(f"📡 Monitoring : {camera}")
-
-
-event = st.selectbox(
-    "Simulate CCTV Event",
-    [
-        "Normal Activity",
-        "Suspicious Person Detected",
-        "Unauthorized Entry",
-        "Fire / Smoke Detection",
-        "Student Emergency"
-    ]
-)
-
-
-if st.button("🔍 Analyze CCTV Feed"):
-
-    if event=="Normal Activity":
-
-        st.success(
-        "✅ Normal Activity Detected - No Risk Found"
-        )
-
-    elif event=="Suspicious Person Detected":
-
-        st.warning(
-        "⚠ Suspicious Person Detected. Alert Security Team."
-        )
-
-    elif event=="Unauthorized Entry":
-
-        st.error(
-        "🚨 Unauthorized Entry Detected."
-        )
-
-    elif event=="Fire / Smoke Detection":
-
-        st.error(
-        "🔥 Fire Risk Detected. Emergency Response Activated."
-        )
-
-    else:
-
-        st.warning(
-        "🏥 Student Emergency Detected."
-        )
-
-
-# ==============================
-# 📹 CCTV MODULE END
-# ==============================
-
-
-        st.markdown(
-        f"""
-
-<div class="ai-card">
-
-<h3>💡 AI Safety Recommendation</h3>
-
-<p>{suggestion}</p>
-
-</div>
-
-        """,
-        unsafe_allow_html=True
-        )
-
-
-# ==============================
-# 📹 CCTV MODULE START HERE
-# ==============================
-
-
-st.divider()
-
-st.subheader("📹 AI Based CCTV Surveillance System")
-
-
-st.markdown("""
-<div class="cctv-card">
-
-<h3>👁 Smart Campus Vision</h3>
-
-AI monitors CCTV feeds and detects suspicious activities.
-
-</div>
-
-""", unsafe_allow_html=True)
-
-
-
-camera = st.selectbox(
-    "Select CCTV Camera",
-    [
-        "Main Gate Camera",
-        "Library Camera",
-        "Parking Area Camera",
-        "Hostel Corridor Camera",
-        "Laboratory Camera"
-    ]
-)
-
-
-st.info(f"📡 Monitoring : {camera}")
-
-
-event = st.selectbox(
-    "Simulate CCTV Event",
-    [
-        "Normal Activity",
-        "Suspicious Person Detected",
-        "Unauthorized Entry",
-        "Fire / Smoke Detection",
-        "Student Emergency"
-    ]
-)
-
-
-if st.button("🔍 Analyze CCTV Feed"):
-
-    if event=="Normal Activity":
-
-        st.success(
-        "✅ Normal Activity Detected - No Risk Found"
-        )
-
-    elif event=="Suspicious Person Detected":
-
-        st.warning(
-        "⚠ Suspicious Person Detected. Alert Security Team."
-        )
-
-    elif event=="Unauthorized Entry":
-
-        st.error(
-        "🚨 Unauthorized Entry Detected."
-        )
-
-    elif event=="Fire / Smoke Detection":
-
-        st.error(
-        "🔥 Fire Risk Detected. Emergency Response Activated."
-        )
-
-    else:
-
-        st.warning(
-        "🏥 Student Emergency Detected."
-        )
-
-
-# ==============================
-# 📹 CCTV MODULE END
-# ==============================
-
-        st.markdown(
-        f"""
-
-<div class="ai-card">
-
-<h3>💡 AI Safety Recommendation</h3>
-
-<p>{suggestion}</p>
-
-</div>
-
-        """,
-        unsafe_allow_html=True
-        )
-
-
-# ==============================
-# 📹 CCTV MODULE START HERE
-# ==============================
-
-
-st.divider()
-
-st.subheader("📹 AI Based CCTV Surveillance System")
-
-
-st.markdown("""
-<div class="cctv-card">
-
-<h3>👁 Smart Campus Vision</h3>
-
-AI monitors CCTV feeds and detects suspicious activities.
-
-</div>
-
-""", unsafe_allow_html=True)
-
-
-
-camera = st.selectbox(
-    "Select CCTV Camera",
-    [
-        "Main Gate Camera",
-        "Library Camera",
-        "Parking Area Camera",
-        "Hostel Corridor Camera",
-        "Laboratory Camera"
-    ]
-)
-
-
-st.info(f"📡 Monitoring : {camera}")
-
-
-event = st.selectbox(
-    "Simulate CCTV Event",
-    [
-        "Normal Activity",
-        "Suspicious Person Detected",
-        "Unauthorized Entry",
-        "Fire / Smoke Detection",
-        "Student Emergency"
-    ]
-)
-
-
-if st.button("🔍 Analyze CCTV Feed"):
-
-    if event=="Normal Activity":
-
-        st.success(
-        "✅ Normal Activity Detected - No Risk Found"
-        )
-
-    elif event=="Suspicious Person Detected":
-
-        st.warning(
-        "⚠ Suspicious Person Detected. Alert Security Team."
-        )
-
-    elif event=="Unauthorized Entry":
-
-        st.error(
-        "🚨 Unauthorized Entry Detected."
-        )
-
-    elif event=="Fire / Smoke Detection":
-
-        st.error(
-        "🔥 Fire Risk Detected. Emergency Response Activated."
-        )
-
-    else:
-
-        st.warning(
-        "🏥 Student Emergency Detected."
-        )
-
-
-# ==============================
-# 📹 CCTV MODULE END
-# ==============================
-
-
-
-# ---------------- SAMPLE DEMO ----------------
-
-st.divider()
-
-st.subheader("📌 Sample Incident Examples")
-st.divider()
 
 
 st.subheader(
-    "📹 AI Based CCTV Surveillance System"
+"📹 AI CCTV Surveillance Simulation"
 )
 
 
 
 st.markdown("""
-<div class="cctv-card">
+<div class="cctv">
 
-<h3>👁 Smart Campus Vision</h3>
 
-AI monitors CCTV feeds and detects
-suspicious activities, emergencies and safety threats.
+<h2>
+👁 Smart Campus Vision
+</h2>
+
+
+<p>
+
+AI monitors CCTV cameras and detects
+suspicious activities and emergencies.
+
+</p>
+
 
 </div>
 
@@ -572,240 +465,217 @@ unsafe_allow_html=True)
 
 
 
-st.divider()
-
-
-
-cam1,cam2,cam3 = st.columns(3)
-
-
-with cam1:
-
-    st.metric(
-        "📹 Active Cameras",
-        "24"
-    )
-
-
-with cam2:
-
-    st.metric(
-        "👥 People Detected",
-        "156"
-    )
-
-
-with cam3:
-
-    st.metric(
-        "🚨 Alerts",
-        "3"
-    )
-
-
-
-st.divider()
-
-
 
 camera = st.selectbox(
-    "Select CCTV Camera",
 
-    [
-        "Main Gate Camera",
-        "Library Camera",
-        "Parking Area Camera",
-        "Hostel Corridor Camera",
-        "Laboratory Camera"
-    ]
+"Select CCTV Camera",
+
+[
+
+"Main Gate Camera",
+
+"Library Camera",
+
+"Parking Area Camera",
+
+"Hostel Corridor Camera",
+
+"Laboratory Camera"
+
+]
+
 )
+
 
 
 st.info(
-    f"📡 Monitoring : {camera}"
+f"📡 Monitoring : {camera}"
 )
+
 
 
 
 event = st.selectbox(
-    "Simulate CCTV Event",
 
-    [
-        "Normal Activity",
-        "Suspicious Person Detected",
-        "Unauthorized Entry",
-        "Fire / Smoke Detection",
-        "Student Emergency"
-    ]
+"Simulate CCTV Event",
+
+[
+
+"Normal Activity",
+
+"Suspicious Person Detected",
+
+"Unauthorized Entry",
+
+"Fire Detection",
+
+"Student Emergency"
+
+]
+
 )
 
 
 
+
 if st.button(
-    "🔍 Analyze CCTV Feed",
-    use_container_width=True
+"🔍 Analyze CCTV Feed",
+use_container_width=True
 ):
 
 
     if event=="Normal Activity":
 
-        st.success(
-        """
-        ✅ Normal Activity Detected
 
-        AI Status:
-        No security risk identified.
-        """
+        st.success(
+        "✅ Normal Activity Detected - No Risk Found"
         )
 
 
     elif event=="Suspicious Person Detected":
 
+
         st.warning(
-        """
-        ⚠ Suspicious Activity Detected
-
-        AI Observation:
-        Unusual movement pattern found.
-
-        Action:
-        Inform security team.
-        """
+        "⚠ Suspicious Person Detected - Security Alert Generated"
         )
 
 
     elif event=="Unauthorized Entry":
 
+
         st.error(
-        """
-        🚨 Unauthorized Entry Alert
-
-        AI Observation:
-        Restricted area access detected.
-
-        Action:
-        Verify person identity.
-        """
+        "🚨 Unauthorized Entry Detected"
         )
 
 
-    elif event=="Fire / Smoke Detection":
+    elif event=="Fire Detection":
+
 
         st.error(
-        """
-        🔥 Fire Hazard Detected
-
-        AI Observation:
-        Smoke pattern detected.
-
-        Action:
-        Activate emergency response.
-        """
+        "🔥 Fire Hazard Detected - Emergency Response Activated"
         )
 
 
     else:
 
+
         st.warning(
-        """
-        🏥 Student Emergency Detected
-
-        AI Observation:
-        Possible health emergency.
-
-        Action:
-        Contact medical support.
-        """
+        "🏥 Student Medical Emergency Detected"
         )
 
 
 
-# ==================================================
-# SAMPLE INCIDENTS
-# ==================================================
 
 
 st.divider()
 
 
+
+
+
+# ================= SAMPLE CASES =================
+
+
+
 st.subheader(
-    "📌 Sample Incident Examples"
+"📌 Sample AI Scenarios"
 )
+
 
 
 samples=[
 
-"Mobile stolen near library",
+"📱 Mobile Theft Detection",
 
-"Fire detected in laboratory",
+"🔥 Fire Emergency",
 
-"Student harassment complaint",
+"👊 Harassment Complaint",
 
-"Unknown person near gate",
+"🚪 Unauthorized Entry",
 
-"Student injured during sports"
+"🏥 Medical Emergency"
 
 ]
+
 
 
 cols=st.columns(5)
 
 
-for i,s in enumerate(samples):
 
-    with cols[i]:
-
-        st.info(s)
+for col,item in zip(cols,samples):
 
 
+    with col:
 
-# ==================================================
-# AI WORKFLOW
-# ==================================================
+
+        st.markdown(f"""
+
+<div class="sample">
+
+{item}
+
+</div>
+
+""",
+        unsafe_allow_html=True)
+
+
+
+
 
 
 st.divider()
 
 
+
+
+
+# ================= WORKFLOW =================
+
+
+
 st.subheader(
-    "⚙ Complete AI Workflow"
+"⚙ AI Processing Workflow"
 )
 
 
 
 st.markdown("""
-<div class="workflow">
+<div class="ai-card">
 
 
 👨‍🎓 Student Reports Incident
 
-<br>⬇<br>
+<br>
+⬇
+<br>
 
-📝 NLP Text Processing
+📝 Text Processing
 
-<br>⬇<br>
+<br>
+⬇
+<br>
 
-🤖 AI Classification Model
+🤖 AI Classification
 
-<br>⬇<br>
+<br>
+⬇
+<br>
 
 🏷 Category Prediction
 
-<br>⬇<br>
+<br>
+⬇
+<br>
 
-📹 CCTV Monitoring
+💡 Safety Suggestion
 
-<br>⬇<br>
+<br>
+⬇
+<br>
 
-🚨 Threat Detection
-
-<br>⬇<br>
-
-👮 Security Response
-
-<br>⬇<br>
-
-🛡 Safer Campus Environment
+🛡 Safer Campus
 
 
 </div>
@@ -815,54 +685,62 @@ unsafe_allow_html=True)
 
 
 
-# ==================================================
-# FEATURES
-# ==================================================
+
 
 
 st.divider()
+
+
+
+
+
+# ================= FEATURES =================
+
 
 
 st.subheader(
-    "✨ System Capabilities"
+"✨ AI Capabilities"
 )
 
 
 
-a,b,c = st.columns(3)
+c1,c2,c3=st.columns(3)
 
 
-with a:
+
+with c1:
 
     st.success(
-        "🧠 NLP Based Analysis"
+    "🧠 NLP Analysis"
     )
 
     st.success(
-        "⚡ Instant Prediction"
+    "⚡ Fast Prediction"
     )
 
 
-with b:
+with c2:
 
-    st.success(
-        "📹 CCTV Monitoring"
+    st.info(
+    "📹 CCTV Monitoring"
     )
 
-    st.success(
-        "🚨 Alert Generation"
+    st.info(
+    "🚨 Threat Detection"
     )
 
 
-with c:
+with c3:
 
-    st.success(
-        "💡 Safety Suggestions"
+    st.warning(
+    "💡 Safety Suggestions"
     )
 
-    st.success(
-        "🔒 Campus Protection"
+    st.warning(
+    "🛡 Risk Prevention"
     )
+
+
 
 
 
@@ -870,11 +748,26 @@ st.divider()
 
 
 
-st.success(
-    "🎉 AI Live Demonstration Completed Successfully!"
-)
+
+# ================= FOOTER =================
 
 
-st.caption(
-    "Campus Safety Incident Logger | AI Powered Smart Campus Solution"
-)
+
+st.markdown("""
+<div class="footer">
+
+
+<h2>
+🚀 AI Live Demo Completed
+</h2>
+
+
+<p>
+Campus Safety Incident Logger | Artificial Intelligence Layer
+</p>
+
+
+</div>
+
+""",
+unsafe_allow_html=True)

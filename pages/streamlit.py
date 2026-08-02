@@ -1,186 +1,662 @@
 import streamlit as st
 
+
 st.set_page_config(
     page_title="Programming Used",
     page_icon="💻",
     layout="wide"
 )
 
-st.title("💻 Programming & Technologies Used")
-st.write("Technologies used to develop the Campus Safety Incident Logger.")
+
+# ================= CSS =================
+
+st.markdown("""
+<style>
+
+/* Background */
+
+.stApp{
+
+background:
+linear-gradient(
+135deg,
+#f5f3ff,
+#ecfeff
+);
+
+}
+
+
+/* Header */
+
+.hero{
+
+background:
+linear-gradient(
+135deg,
+#4f46e5,
+#9333ea
+);
+
+padding:45px;
+
+border-radius:30px;
+
+text-align:center;
+
+color:white;
+
+box-shadow:
+0 15px 35px rgba(0,0,0,0.25);
+
+}
+
+
+.hero h1{
+
+font-size:48px;
+
+font-weight:900;
+
+}
+
+
+.hero p{
+
+font-size:20px;
+
+color:#e0e7ff;
+
+}
+
+
+
+/* Section */
+
+.section{
+
+font-size:32px;
+
+font-weight:900;
+
+color:#312e81;
+
+margin-top:25px;
+
+}
+
+
+
+/* Cards */
+
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:22px;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.12);
+
+text-align:center;
+
+margin-bottom:20px;
+
+}
+
+
+
+
+.card h2{
+
+color:#4f46e5;
+
+}
+
+
+
+/* Python */
+
+.python{
+
+background:
+linear-gradient(
+135deg,
+#fef9c3,
+#fde68a
+);
+
+padding:25px;
+
+border-radius:20px;
+
+border-left:8px solid #eab308;
+
+}
+
+
+
+
+/* AI */
+
+
+.ai{
+
+background:
+linear-gradient(
+135deg,
+#dcfce7,
+#bbf7d0
+);
+
+padding:25px;
+
+border-radius:20px;
+
+border-left:8px solid #16a34a;
+
+}
+
+
+
+/* Database */
+
+
+.database{
+
+background:
+linear-gradient(
+135deg,
+#dbeafe,
+#bfdbfe
+);
+
+padding:25px;
+
+border-radius:20px;
+
+border-left:8px solid #2563eb;
+
+}
+
+
+
+/* Workflow */
+
+
+.workflow{
+
+background:white;
+
+padding:30px;
+
+border-radius:25px;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.15);
+
+font-size:18px;
+
+line-height:2;
+
+}
+
+
+
+/* Footer */
+
+
+.footer{
+
+text-align:center;
+
+padding:30px;
+
+color:#64748b;
+
+}
+
+
+
+</style>
+
+""",
+unsafe_allow_html=True)
+
+
+
+
+# ================= HEADER =================
+
+
+st.markdown("""
+<div class="hero">
+
+<h1>💻 Programming & Technologies Used</h1>
+
+<p>
+Technology Stack Behind Campus Safety Incident Logger
+</p>
+
+</div>
+
+""",
+unsafe_allow_html=True)
+
+
+
+st.write("")
+
+
+
+
+# ================= OVERVIEW =================
+
+
+st.markdown(
+'<div class="section">📌 Project Overview</div>',
+unsafe_allow_html=True
+)
+
+
+
+st.markdown("""
+<div class="card">
+
+<h2>
+🚀 Python Based Smart Application
+</h2>
+
+
+<p>
+
+Campus Safety Incident Logger is developed using Python
+and Streamlit framework.
+
+The system integrates database management,
+AI/ML processing and analytics to create a smart
+campus safety platform.
+
+</p>
+
+</div>
+
+""",
+unsafe_allow_html=True)
+
+
 
 st.divider()
 
-# ---------------- Overview ----------------
 
-st.subheader("📌 Project Overview")
 
-st.info("""
-Campus Safety Incident Logger is a Python-based web application developed using
-the Streamlit framework. It enables students to report campus incidents,
-allows administrators to manage reports, and demonstrates a simple AI-based
-incident classification system.
-""")
 
-st.divider()
+# ================= TECHNOLOGIES =================
 
-# ---------------- Technologies ----------------
 
-st.subheader("🛠 Technologies Used")
+st.markdown(
+'<div class="section">🛠 Core Technologies</div>',
+unsafe_allow_html=True
+)
 
-col1, col2 = st.columns(2)
 
-with col1:
 
-    st.success("🐍 Python 3.x")
-    st.success("🚀 Streamlit")
-    st.success("💾 SQLite Database")
-    st.success("📊 Pandas")
+c1,c2,c3=st.columns(3)
 
-with col2:
 
-    st.success("🤖 AI / Machine Learning")
-    st.success("🧠 Rule-Based NLP")
-    st.success("📈 Data Analytics")
-    st.success("☁ Streamlit Cloud")
-
-st.divider()
-
-# ---------------- Why Streamlit ----------------
-
-st.subheader("🚀 Why Streamlit?")
-
-st.write("""
-✔ Fast web application development
-
-✔ Easy integration with Python
-
-✔ Interactive dashboard support
-
-✔ Supports AI & Machine Learning
-
-✔ Simple deployment on Streamlit Cloud
-
-✔ No HTML, CSS or JavaScript required
-""")
-
-st.divider()
-
-# ---------------- Libraries ----------------
-
-st.subheader("📚 Python Libraries")
-
-c1, c2, c3 = st.columns(3)
 
 with c1:
-    st.info("""
-🐍 streamlit
 
-📊 pandas
+    st.markdown("""
+    <div class="python">
 
-💾 sqlite3
-""")
+    <h2>🐍 Python</h2>
+
+    <p>
+    Main programming language used for
+    application logic, AI processing and database operations.
+    </p>
+
+    </div>
+
+    """,
+    unsafe_allow_html=True)
+
+
+
 
 with c2:
-    st.info("""
-🤖 scikit-learn
 
-📦 joblib
+    st.markdown("""
+    <div class="database">
 
-📅 datetime
-""")
+    <h2>💾 SQLite</h2>
+
+    <p>
+    Database used for storing incidents,
+    user reports and management updates.
+    </p>
+
+    </div>
+
+    """,
+    unsafe_allow_html=True)
+
+
+
 
 with c3:
-    st.info("""
-📈 matplotlib (optional)
 
-📉 plotly (optional)
+    st.markdown("""
+    <div class="ai">
 
-📝 typing
-""")
+    <h2>🤖 AI / ML</h2>
 
-st.divider()
+    <p>
+    Used for incident classification
+    and safety recommendations.
+    </p>
 
-# ---------------- Project Modules ----------------
+    </div>
 
-st.subheader("📂 Project Modules")
+    """,
+    unsafe_allow_html=True)
 
-st.success("""
-🏠 Home
 
-📖 About
-
-🚨 Report Incident
-
-📄 My Reports
-
-👨‍💼 Admin Dashboard
-
-📊 Analytics
-
-🤖 AI Layer
-
-🚀 Live Demo
-""")
 
 st.divider()
 
-# ---------------- Workflow ----------------
 
-st.subheader("⚙ System Workflow")
 
-st.success("""
-👨‍🎓 Student
 
-⬇
+# ================= STREAMLIT =================
 
-🚨 Report Incident
 
-⬇
+st.markdown(
+'<div class="section">🚀 Why Streamlit?</div>',
+unsafe_allow_html=True
+)
 
-🤖 AI Analysis
 
-⬇
+
+features=[
+
+"⚡ Rapid Web Application Development",
+
+"🐍 Direct Python Integration",
+
+"📊 Interactive Dashboard Support",
+
+"🤖 AI Model Integration",
+
+"☁ Easy Cloud Deployment",
+
+"🎨 No Frontend Coding Required"
+
+]
+
+
+
+cols=st.columns(3)
+
+
+
+for i,item in enumerate(features):
+
+    with cols[i%3]:
+
+        st.markdown(f"""
+
+        <div class="card">
+
+        <h3>{item}</h3>
+
+        </div>
+
+        """,
+        unsafe_allow_html=True)
+
+
+
+
+st.divider()
+
+
+
+
+# ================= LIBRARIES =================
+
+
+st.markdown(
+'<div class="section">📚 Python Libraries</div>',
+unsafe_allow_html=True
+)
+
+
+
+l1,l2,l3=st.columns(3)
+
+
+
+libraries=[
+
+("⚡ Streamlit",
+"Frontend and dashboard development"),
+
+("📊 Pandas",
+"Data analysis and processing"),
+
+("🤖 Scikit Learn",
+"Machine learning implementation")
+
+]
+
+
+
+for col,data in zip(
+    [l1,l2,l3],
+    libraries
+):
+
+    with col:
+
+        st.markdown(f"""
+
+        <div class="card">
+
+        <h2>{data[0]}</h2>
+
+        <p>{data[1]}</p>
+
+        </div>
+
+        """,
+        unsafe_allow_html=True)
+
+
+
+st.divider()
+
+
+
+
+# ================= MODULES =================
+
+
+st.markdown(
+'<div class="section">📂 Project Modules</div>',
+unsafe_allow_html=True
+)
+
+
+
+modules=[
+
+"🏠 Home",
+
+"📖 About",
+
+"🚨 Report Incident",
+
+"📄 My Reports",
+
+"👨‍💼 Admin Dashboard",
+
+"📊 Analytics",
+
+"🤖 AI Layer",
+
+"🚀 Live Demo"
+
+]
+
+
+
+cols=st.columns(4)
+
+
+
+for i,m in enumerate(modules):
+
+    with cols[i%4]:
+
+        st.markdown(f"""
+
+        <div class="card">
+
+        <h3>{m}</h3>
+
+        </div>
+
+        """,
+        unsafe_allow_html=True)
+
+
+
+st.divider()
+
+
+
+
+# ================= WORKFLOW =================
+
+
+st.markdown(
+'<div class="section">⚙ System Workflow</div>',
+unsafe_allow_html=True
+)
+
+
+
+st.markdown("""
+<div class="workflow">
+
+
+👨‍🎓 Student Reports Incident
+
+<br>⬇<br>
+
+🚨 Incident Submission
+
+<br>⬇<br>
+
+🤖 AI Classification
+
+<br>⬇<br>
 
 💾 SQLite Database
 
-⬇
+<br>⬇<br>
 
-👨‍💼 Admin Dashboard
+👨‍💼 Admin Verification
 
-⬇
+<br>⬇<br>
 
-📊 Analytics
+📊 Analytics Dashboard
 
-⬇
+<br>⬇<br>
 
-📄 Student Tracks Report
-""")
+🛡 Safer Campus
+
+
+</div>
+
+""",
+unsafe_allow_html=True)
+
+
 
 st.divider()
 
-# ---------------- Advantages ----------------
 
-st.subheader("🌟 Advantages")
 
-col1, col2 = st.columns(2)
 
-with col1:
+# ================= ADVANTAGES =================
+
+
+st.markdown(
+'<div class="section">🌟 Advantages</div>',
+unsafe_allow_html=True
+)
+
+
+
+a,b=st.columns(2)
+
+
+
+with a:
 
     st.success("✔ User Friendly Interface")
-    st.success("✔ Fast Performance")
+
     st.success("✔ Secure Database")
 
-with col2:
+    st.success("✔ Fast Processing")
 
-    st.success("✔ Easy Deployment")
-    st.success("✔ AI Ready")
-    st.success("✔ Scalable Architecture")
+
+
+with b:
+
+    st.info("✔ AI Ready Architecture")
+
+    st.info("✔ Easy Deployment")
+
+    st.info("✔ Future Scalable")
+
+
+
 
 st.divider()
 
-# ---------------- Footer ----------------
 
-st.success("🎉 Campus Safety Incident Logger developed using Python & Streamlit")
 
-st.caption("Department of Artificial Intelligence and Data Science | KIET | JNTUK")
+
+# ================= FOOTER =================
+
+
+st.markdown("""
+<div class="footer">
+
+
+<h2>
+🎉 Campus Safety Incident Logger
+</h2>
+
+
+<p>
+Developed using Python | Streamlit | AI/ML | SQLite
+</p>
+
+
+<p>
+Artificial Intelligence and Data Science | KIET | JNTUK
+</p>
+
+
+</div>
+
+""",
+unsafe_allow_html=True)
